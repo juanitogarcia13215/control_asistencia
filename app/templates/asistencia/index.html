@@ -5,55 +5,132 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Asistencia</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/your-font-awesome-kit.js" crossorigin="anonymous"></script>
+    <style>
+        body {
+            background-color: #f89fe9;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .container {
+            margin-top: 50px;
+        }
+
+        h1 {
+            color: #28a745; /* Verde */
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            font-weight: 500;
+        }
+
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        .btn-primary, .btn-secondary {
+            margin: 5px;
+        }
+
+        .btn-primary {
+            background-color: #28a745; /* Verde */
+            border-color: #28a745;
+        }
+
+        .btn-primary:hover {
+            background-color: #218838;
+            border-color: #1e7e34;
+        }
+
+        .btn-secondary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+        .btn-secondary:hover {
+            background-color: #0069d9;
+            border-color: #0062cc;
+        }
+
+        .acciones {
+            display: flex; /* Para alinear los botones horizontalmente */
+            justify-content: center; /* Centra los botones */
+        }
+
+        /* Centrar la imagen */
+        img {
+            display: block;
+            margin: 0 auto;
+        }
+
+        .jumbotron {
+            background-color: rgba(160, 212, 247, 0.89); /* Fondo blanco para mayor contraste */
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); /* Sombra más pronunciada */
+            overflow: hidden; /* Para bordes redondeados consistentes con la sombra */
+            text-align: center; /* Centra el contenido del jumbotron */
+        }
+    </style>
 </head>
 
 <body>
-    <header>
-        <div>
-            <div>
-                <img src="" alt="imagen">
+    <div class="container">
+        <div class="jumbotron p-5">
+            <img src="static/img/logo_sena.webp" alt="logo sena" width="150" height="150">
+            <h1>Lista de Asistencia</h1>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Fecha</th>
+                            <th>Estado</th>
+                            <th>Nombre del curso</th>
+                            <th>Nombre del aprendiz</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for asistencia in data %}
+                        <tr>
+                            <td>{{asistencia.idAprendiz}}</td>
+                            <td>{{asistencia.fecha}}</td>
+                            <td>{{asistencia.estado}}</td>
+                            <td>{{asistencia.nombreCurso}}</td>
+                            <td>{{asistencia.nombreAprendiz}}</td>
+                            <td class="acciones">
+                                <a href="{{url_for('asistencia.edit', id=asistencia.idAprendiz)}}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> Editar</a>
+                                <a href="{{url_for('asistencia.delete', id=asistencia.idAprendiz)}}" class="btn btn-secondary btn-sm"><i class="fas fa-trash-alt"></i> Eliminar</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
             </div>
-        </div>
-    </header>
-    <div>
-        <h1>Lista de Asistencia</h1>
-        <div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Fecha</th>
-                        <th>Estado</th>
-                        <th>Nombre del curso</th>
-                        <th>nombre del aprendiz</th>
-                     
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for data in data %}
-                    <tr>
-                        <td>{{asistencia.idAprendiz}}</td>
-                        <td>{{asistencia.nombre}}</td>
-                        <td>{{asistencia.correo}}</td>
-                        <td>{{asistencia.programaFormacion}}</td>
-                        <td>{{asistencia.telefono}}</td>
-                        <td>{{asistencia.idCurso}}</td>
-                        <td>
-                            <a href="{{url_for('aprendiz.edit', id=aprendiz.idAprendiz)}}">Editar</a>
-                            <a href="{{url_for('aprendiz.delete', id=aprendiz.idAprendiz)}}">Eliminar</a>
-                        </td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
-        <div>
-            <a href="{{url_for('aprendiz.add')}}">Agregar Aprendiz</a>
-        </div>
-        <div>
-            <a href="{{url_for('auth.principal')}}">Regresar a la Página Principal</a>
+            <a href="{{url_for('asistencia.add')}}" class="btn btn-success"><i class="fas fa-plus"></i> Agregar Asistencia</a> <br>
+            <a href="{{url_for('auth.principal')}}" class="btn btn-secondary mt-3"><i class="fas fa-arrow-left"></i> Regresar a la Página Principal</a>
         </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

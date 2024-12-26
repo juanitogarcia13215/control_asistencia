@@ -5,13 +5,9 @@ auth_bp = Blueprint('auth', __name__)
 
 @auth_bp.route("/")
 def index():
-    return render_template("login/login.html")
+    return render_template("principal/index.html")
 
-@auth_bp.route('/logout')
-@login_required
-def logout():
-    logout_user()
-    return redirect(url_for('auth.login'))
+
 
 @auth_bp.route("/aprendiz")
 def aprendiz():

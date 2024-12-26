@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Asistencia</title>
+</head>
+
+<body>
+    <header>
+        <div>
+            <div>
+                <img src="" alt="imagen">
+            </div>
+        </div>
+    </header>
+    <div>
+        <h1>Lista de Asistencia</h1>
+        <div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Fecha</th>
+                        <th>Estado</th>
+                        <th>Nombre del curso</th>
+                        <th>nombre del aprendiz</th>
+                     
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for data in data %}
+                    <tr>
+                        <td>{{asistencia.idAprendiz}}</td>
+                        <td>{{asistencia.nombre}}</td>
+                        <td>{{asistencia.correo}}</td>
+                        <td>{{asistencia.programaFormacion}}</td>
+                        <td>{{asistencia.telefono}}</td>
+                        <td>{{asistencia.idCurso}}</td>
+                        <td>
+                            <a href="{{url_for('aprendiz.edit', id=aprendiz.idAprendiz)}}">Editar</a>
+                            <a href="{{url_for('aprendiz.delete', id=aprendiz.idAprendiz)}}">Eliminar</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <a href="{{url_for('aprendiz.add')}}">Agregar Aprendiz</a>
+        </div>
+        <div>
+            <a href="{{url_for('auth.principal')}}">Regresar a la Página Principal</a>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Aprendices</title>
+</head>
+
+<body>
+    <header>
+        <div>
+            <div>
+                <img src="" alt="imagen">
+            </div>
+        </div>
+    </header>
+    <div>
+        <h1>Lista de Aprendices</h1>
+        <div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Correo</th>
+                        <th>programa de formacion</th>
+                        <th>Teléfono</th>
+                        <th>Curso</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for aprendiz in data %}
+                    <tr>
+                        <td>{{aprendiz.idAprendiz}}</td>
+                        <td>{{aprendiz.nombre}}</td>
+                        <td>{{aprendiz.correo}}</td>
+                        <td>{{aprendiz.programaFormacion}}</td>
+                        <td>{{aprendiz.telefono}}</td>
+                        <td>{{aprendiz.idCurso}}</td>
+                        <td>
+                            <a href="{{url_for('aprendiz.edit', id=aprendiz.idAprendiz)}}">Editar</a>
+                            <a href="{{url_for('aprendiz.delete', id=aprendiz.idAprendiz)}}">Eliminar</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <a href="{{url_for('aprendiz.add')}}">Agregar Aprendiz</a>
+        </div>
+        <div>
+            <a href="{{url_for('auth.principal')}}">Regresar a la Página Principal</a>
+        </div>
+    </div>
+</body>
+
+</html>

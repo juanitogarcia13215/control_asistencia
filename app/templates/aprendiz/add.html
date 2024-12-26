@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Agregar aprendiz</title>
+    
+</head>
+<body>
+    <div class="overlay">
+        <h1>Agregar aprendiz</h1>
+        <form action="{{ url_for('instructor.add') }}" method="post">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <div class="form-group">
+                <label for="nombre">Nombre del aprendiz</label>
+                <input type="text" id="nombre" name="nombre" required>
+            </div>
+            <div class="form-group">
+                <label for="correo">correo del aprendiz</label>
+                <input type="text" id="correo" name="correo" required>
+            </div>
+            <div class="form-group">
+                <label for="documento">Documento del aprendiz</label>
+                <input type="text" id="documento" name="documento" required>
+            </div>
+            <div class="form-group">
+                <label for="telefono">Teléfono del aprendiz</label>
+                <input type="text" id="telefono" name="telefono" required>
+            </div>
+            <div class="mb-3">
+                <label for="idCurso" class="form-label">nombre del curso</label>
+                <select class="form-select" id="idCurso" name="idCurso" required>
+                    {% for curso in curso %}
+                        <option value="{{ curso.nombre }}">{{ curso.nombre }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+      
+            <button type="submit">Agregar aprendiz</button>
+            <a href="{{url_for('aprendiz.index')}}">Volver a la vista Principal</a>
+        </form>
+    </div>
+</body>
+</html>

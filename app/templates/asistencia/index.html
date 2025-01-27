@@ -105,7 +105,7 @@
                             <th>ID</th>
                             <th>Fecha</th>
                             <th>Estado</th>
-                            <th>Nombre del curso</th>
+                            <th>Nombre de la ficha</th>
                             <th>Nombre del aprendiz</th>
                         </tr>
                     </thead>
@@ -115,7 +115,7 @@
                             <td>{{asistencia.idAprendiz}}</td>
                             <td>{{asistencia.fecha}}</td>
                             <td>{{asistencia.estado}}</td>
-                            <td>{{asistencia.nombreCurso}}</td>
+                            <td>{{asistencia.nombreFicha}}</td>
                             <td>{{asistencia.nombreAprendiz}}</td>
                             <td class="acciones">
                                 <a href="{{url_for('asistencia.edit', id=asistencia.idAprendiz)}}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> Editar</a>

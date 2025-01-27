@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Editar Asistencia</title>
+</head>
+<body>
+    <div class="overlay">
+        <h1>Editar Asistencia</h1>
+        <form action="{{ url_for('asistencia.edit', id=asistencia.idAsistencia) }}" method="post">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            
+            <div class="form-group">
+                <label for="fecha">Fecha</label>
+                <input type="date" id="fecha" name="fecha" value="{{ asistencia.fecha }}" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="idAprendiz" class="form-label">Aprendiz</label>
+                <select class="form-select" id="idAprendiz" name="idAprendiz" required>
+                    {% for aprendiz in aprendices %}
+                        <option value="{{ aprendiz.idAprendiz }}" {% if aprendiz.idAprendiz == asistencia.idAprendiz %}selected{% endif %}>
+                            {{ aprendiz.nombre }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="estado">Estado</label>
+                <select class="form-select" id="estado" name="estado" required>
+                    <option value="Presente" {% if asistencia.estado == 'Presente' %}selected{% endif %}>Presente</option>
+                    <option value="Ausente" {% if asistencia.estado == 'Ausente' %}selected{% endif %}>Ausente</option>
+                    <option value="Excusa" {% if asistencia.estado == 'Excusa' %}selected{% endif %}>Excusa</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="observaciones">Observaciones</label>
+                <textarea id="observaciones" name="observaciones" rows="3">{{ asistencia.observaciones }}</textarea>
+            </div>
+
+            <button type="submit">Actualizar Asistencia</button>
+            <a href="{{url_for('asistencia.index')}}">Volver a la vista Principal</a>
+        </form>
+    </div>
+</body>
+</html>

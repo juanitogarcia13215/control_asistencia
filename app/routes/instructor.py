@@ -6,8 +6,11 @@ auth_bp= Blueprint('instructor', __name__)
 
 @auth_bp.route("/instructor")
 def index():
-    data=Instructor()
-    return render_template("instructor/index.html", data = data)
+    instructor = Instructor.query.all()
+    return render_template("instructor/index.html", instructor = instructor)
+
+
+
 
 
 @auth_bp.route("/instructor/add", methods=["GET","POST"])  
@@ -40,7 +43,7 @@ def edit(id):
         db.session.commit()
         
         return redirect(url_for('instructor.index'))
-    return render_template(url_for('instructor/edit.html'))
+    return render_template('instructor/edit.html', instructor=instructor)
 
 
 @auth_bp.route("/instructor/delete/<int:id>", methods=['GET','POST'])

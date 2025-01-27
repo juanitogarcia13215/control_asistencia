@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Curso</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .jumbotron {
+            background-color: #a7ceee;
+            margin-top: 20px;
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+        form {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="jumbotron p-5">
+            <img src="static/img/logo_sena.webp" alt="logo sena" width="150" height="150">
+            <h1>Editar Curso</h1>
+            <form action="{{ url_for('curso.edit', id=curso.idCurso) }}" method="post">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                
+                <div class="form-group">
+                    <label for="nombre" class="form-label">Nombre del Curso</label>
+                    <input type="text" class="form-control" id="nombre" name="nombre" value="{{ curso.nombre }}" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="descripcion" class="form-label">Descripción</label>
+                    <textarea class="form-control" id="descripcion" name="descripcion" rows="3" required>{{ curso.descripcion }}</textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="fechaInicio" class="form-label">Fecha de Inicio</label>
+                    <input type="date" class="form-control" id="fechaInicio" name="fechaInicio" value="{{ curso.fechaInicio }}" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="fechaFin" class="form-label">Fecha de Finalización</label>
+                    <input type="date" class="form-control" id="fechaFin" name="fechaFin" value="{{ curso.fechaFin }}" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="idInstructor" class="form-label">Instructor</label>
+                    <select class="form-control" id="idInstructor" name="idInstructor" required>
+                        {% for instructor in instructores %}
+                        <option value="{{ instructor.idInstructor }}" {% if instructor.idInstructor == curso.idInstructor %}selected{% endif %}>
+                            {{ instructor.nombre }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Actualizar Curso</button>
+                <a href="{{ url_for('curso.index') }}" class="btn btn-secondary">Volver</a>
+            </form>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

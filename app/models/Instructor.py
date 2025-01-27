@@ -9,7 +9,7 @@ class Instructor(db.Model,UserMixin):
     documento = db.Column(db.String(255), nullable=False)
     especializacion = db.Column(db.String(255), nullable=False)
     telefono = db.Column(db.String(255), nullable=False)
-    contraseña =db.Column(db.String(255), nullable=False)
+   
     
     def get_id(self):
         return str(self.idInstructor)

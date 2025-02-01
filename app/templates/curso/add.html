@@ -57,7 +57,7 @@
 
                 <div class="form-group">
                     <label for="idInstructor" class="form-label">Instructor</label>
-                    <select class="form-control" id="idInstructor" name="idInstructor" required>
+                    <select  type="integer" class="form-control" id="idInstructor" name="idInstructor" required>
                         {% for instructor in instructores %}
                         <option value="{{ instructor.idInstructor }}">{{ instructor.nombre }}</option>
                         {% endfor %}
